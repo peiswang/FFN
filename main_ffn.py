@@ -234,11 +234,10 @@ def main():
                 [conv_feat_n, conv_feat_c, conv_feat_h, conv_feat_w] = conv_feat.shape
                 X = torch.zeros(max_items, prev_feat_c*kernel_h*kernel_w).to(ffn_device)
                 Y = torch.zeros(max_items, conv_feat_c).to(pretrained_device)
-                print(X.shape)
-                print(Y.shape)
 
                 n_items = 0
                 for batch_idx in range(0, max_items):
+                    print('extracting batch', batch_idx)
                     input, target = next(batch_iterator)
                     input_pretrained = input.cuda(device=pretrained_device, non_blocking=True)
                     model_pretrained(input_pretrained)
@@ -255,15 +254,19 @@ def main():
                     n_positions = prev_feat_pad.shape[0]
                     if n_items + n_positions >= max_items:
                         n_positions = max_items - n_items
-                        X[n_items:n_items+n_positions] = prev_feat_pad
-                        Y[n_items:n_items+n_positions] = conv_feat_tmp
+                        X[n_items:n_items+n_positions] = prev_feat_pad[:n_positions]
+                        Y[n_items:n_items+n_positions] = conv_feat_tmp[:n_positions]
                         break
                     else:
                         X[n_items:n_items+n_positions] = prev_feat_pad
                         Y[n_items:n_items+n_positions] = conv_feat_tmp
+                        n_items += n_positions
 
                 handle_prev.remove()
                 handle_conv.remove()
+
+                print(X.shape)
+                print(Y.shape)
 
                 ## sdd init
                 W_shape = W.shape
