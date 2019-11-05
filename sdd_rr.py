@@ -4,11 +4,20 @@ import time
 import torch
 
 def sdd_rr(X, Y, D, U, V, max_epoch=20):
+
+    D = D.astype(np.float32)
+    U = U.astype(np.float32)
+    V = V.astype(np.float32)
+
     kmax = len(D)
     m = U.shape[0]
     n = V.shape[0]
+
+    X_row_norm = (X*X).sum(axis=1)
+
     for epoch in range(max_epoch):
         print(str(epoch)+' of '+str(max_epoch))
+        start_time = time.time()
         for k in range(kmax):
             #print(str(k)+' of '+str(kmax))
             # given u, v, solve d
@@ -40,12 +49,15 @@ def sdd_rr(X, Y, D, U, V, max_epoch=20):
                 x = X[j, :]
                 s = s - v[j]*x  # s = hat(X)^T*hat(v)
                 tmp = 2*dduu*np.dot(x,s)-t[j]
+                # if dduu*X_row_norm[j]-abs(tmp) < 0:
                 if dduu*np.dot(x,x)-abs(tmp) < 0:
                     v[j] = -np.sign(tmp)
                 else:
                     v[j] = 0
                 s = s + v[j]*x
             V[:, k] = v
+        end_time = time.time()
+        print('solve one iter in', end_time-start_time, 's')
 
     return D, U, V
 
