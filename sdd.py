@@ -156,6 +156,10 @@ def sdd(A, kmax=100, alphamin=0.001, lmax=1000, rhomin=0, yinit=2, max_epoch=20,
         res_old = res_new
         rho =res_new/res
 
+    dsav = dsav.astype(np.float32)
+    xsav = xsav.astype(np.float32)
+    ysav = ysav.astype(np.float32)
+
     return dsav, xsav, ysav
 
 ################# SDD subproblem solver ############################

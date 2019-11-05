@@ -282,6 +282,11 @@ def main():
                 # save
                 with open(args.save_path+'/conv'+ str(conv_idx+1) + '_' + str(kmax) + '.pkl', 'wb') as f:
                     pickle.dump({'D': D, 'U': U, 'V': V}, f, pickle.HIGHEST_PROTOCOL)
+                # with open(args.save_path+'/conv'+ str(conv_idx+1) + '_' + str(kmax) + '.pkl', 'rb') as f:
+                #     sdds = pickle.load(f)
+                #     D = sdds['D']
+                #     U = sdds['U']
+                #     V = sdds['V']
         
                 print('run sdd_rr')
                 start_time = time.time()

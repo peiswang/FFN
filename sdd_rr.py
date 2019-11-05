@@ -49,8 +49,8 @@ def sdd_rr(X, Y, D, U, V, max_epoch=20):
                 x = X[j, :]
                 s = s - v[j]*x  # s = hat(X)^T*hat(v)
                 tmp = 2*dduu*np.dot(x,s)-t[j]
-                # if dduu*X_row_norm[j]-abs(tmp) < 0:
-                if dduu*np.dot(x,x)-abs(tmp) < 0:
+                if dduu*X_row_norm[j]-abs(tmp) < 0:
+                # if dduu*np.dot(x,x)-abs(tmp) < 0:
                     v[j] = -np.sign(tmp)
                 else:
                     v[j] = 0
