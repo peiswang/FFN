@@ -335,9 +335,9 @@ def main():
             with open(args.save_path+'/fc'+ str(6+fc_idx) + '_' + str(kmax) + '.pkl', 'wb') as f:
                     pickle.dump({'D': D, 'U': U, 'V': V}, f, pickle.HIGHEST_PROTOCOL)
 
-            W_r = np.dot(np.multiply(U, D), V.T)
-            W_r = W_r.reshape(W_shape)
-            conv_ffn.weight.data.copy_(torch.from_numpy(W_r))
+            # W_r = np.dot(np.multiply(U, D), V.T)
+            # W_r = W_r.reshape(W_shape)
+            # conv_ffn.weight.data.copy_(torch.from_numpy(W_r))
             # print('validation')
             # validate(val_loader, model_ffn, criterion, args)
             if fc_idx == 1:
