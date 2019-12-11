@@ -14,3 +14,13 @@ Usage:
 Results:
 
  \* Acc@1 70.810 Acc@5 90.050
+
+'''
+@InProceedings{Wang_2017_CVPR,
+author = {Wang, Peisong and Cheng, Jian},
+title = {Fixed-Point Factorized Networks},
+booktitle = {The IEEE Conference on Computer Vision and Pattern Recognition (CVPR)},
+month = {July},
+year = {2017}
+} 
+'''
