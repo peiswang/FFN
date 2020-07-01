@@ -1,13 +1,17 @@
 # FFN
-Code for paper 'Unsupervised Network Quantization via Fixed-point Factorization'
+Code for papers:
+* 'Fixed-Point Factorized Networks', CVPR 2017
+* 'Unsupervised Network Quantization via Fixed-point Factorization', TNNLS
+
+Fixed-point Factorized Network (FFN) is a novel network ternarization approach, i.e., it turns all weights into ternary values {-1, 0, 1}. FFN works well in both training-aware and post-training quantization schemes. It can achieve negligible degradation even without any supervised finetuning on labeled data.
 
 Factorized VGG16 model:
 [BaiduCloud](https://pan.baidu.com/s/1RUyS1rVAuvDYyzM-UK1bOw)
 
-# Usage:
-
+# Train:
     python main_ffn_vgg.py --pretrained <path-to-pretrained-model>
-
+    
+# Test:
     python main_ffn_vgg_test.py --pretrained vgg16_bn/vgg16_ternary_final.pth
 
 
@@ -17,7 +21,7 @@ Factorized VGG16 model:
 
 # Related Papers
 
-Previous version accepted by CVPR 2017: Fixed-Point Factorized Networks
+Please cite our paper if it helps your research:
 
     @InProceedings{Wang_2017_CVPR,
       author = {Wang, Peisong and Cheng, Jian},
